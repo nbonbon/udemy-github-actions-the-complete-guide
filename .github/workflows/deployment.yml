@@ -1,5 +1,5 @@
 # Workflow for 02 starting projects
-name: Reploy Project
+name: Deploy Project
 on: push
 jobs:
   test:
