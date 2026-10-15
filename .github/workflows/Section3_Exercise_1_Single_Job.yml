@@ -12,10 +12,10 @@ jobs:
       #     node-version: 18
       - name: Install Dependencies
         run: npm ci
-        working-directory: ./02 Starting Project/
+        working-directory: ./04 Practice Project (Start)/
       - name: lint, test, and build
         run: |
           npm run lint
           npm run test
           npm run build
-        working-directory: ./02 Starting Project/
+        working-directory: ./04 Practice Project (Start)/
