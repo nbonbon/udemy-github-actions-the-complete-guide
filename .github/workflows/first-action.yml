@@ -1,3 +1,4 @@
+# Standalone workflow
 name: First Workflow
 
 # 1. Required: Specify the event that triggers the workflow
