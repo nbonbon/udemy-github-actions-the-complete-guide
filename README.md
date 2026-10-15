@@ -11,3 +11,5 @@ action - An application that performs a frequently repeated task (typically comp
 command - A (typically simple) shell command that is defined by you
 
 You can view the SBOM (SW bill of material /  what is installed on the runner image) by visiting this: https://github.com/actions/runner-images/releases#release-ubuntu26/20261012.163
+
+NOTE: By Default jobs run in parallel

@@ -1,0 +1,38 @@
+# Workflow for 02 starting projects
+name: Reploy Project
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./02 Starting Project/
+      - name: Run tests
+        run: npm test
+        working-directory: ./02 Starting Project/
+  deploy:
+    needs: test # Declares that this job needs the test job to run first (sequential)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./02 Starting Project/
+      - name: Build Project
+        run: npm run build
+        working-directory: ./02 Starting Project/
+      - name: Deploy
+        run: echo "Deploying..."
+        working-directory: ./02 Starting Project/
