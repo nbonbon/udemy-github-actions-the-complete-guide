@@ -1,0 +1,40 @@
+name: Section 3 Exercise Sequential Jobs
+on: workflow_dispatch
+jobs:
+  get-source-and-install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      # Installation was not necessary but I do not believe I saw Node in SBOM?
+      # - name: Install NodeJS   
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./04 Practice Project (Start)/
+  lint:
+    needs: get-source-and-install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: lint
+        run: |
+          npm run lint
+        working-directory: ./04 Practice Project (Start)/
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: |
+          npm run test
+        working-directory: ./04 Practice Project (Start)/
+  build:
+    needs: get-source-and-install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: build
+        run: |
+          npm run build
+        working-directory: ./04 Practice Project (Start)/

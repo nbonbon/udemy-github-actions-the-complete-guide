@@ -6,7 +6,8 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      # - name: Install NodeJS
+      # Installation was not necessary but I do not believe I saw Node in SBOM?
+      # - name: Install NodeJS   
       #   uses: actions/setup-node@v3
       #   with:
       #     node-version: 18
