@@ -31,7 +31,7 @@ jobs:
           npm run test
         working-directory: ./04 Practice Project (Start)/
   build:
-    needs: get-source-and-install-dependencies
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: build
