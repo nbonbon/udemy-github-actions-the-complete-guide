@@ -1,0 +1,13 @@
+name: Section 3 Exercise 2 - Issues Event
+# https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#issues
+# https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
+on:
+  issues:
+    types: [opened]
+jobs:
+  echo-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Issue Details
+        run: |
+          echo "A new issue was opened: ${{ toJSON(github.event.issue) }}"
