@@ -16,3 +16,8 @@ NOTE: By Default jobs run in parallel and on different runners
 
 ## Section 4
 - Filter Pattern Cheatsheet: https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#filter-pattern-cheat-sheet
+- By default pull requests based on forks do NOT trigger a workflow
+  - Since anyone can fork a repo this keep people from starting workflows maliciously
+  - You have to as a repo owner approve the run
+- Can include certain keywords to skip a workflow in a commit message
+  - https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs
