@@ -21,6 +21,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+        script-file: ${{ steps.publish.outputs.script-file }} # outputs name has to match value written to $GITHUB_OUTPUT in the actual step below
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -31,7 +33,8 @@ jobs:
         run: npm run build
         working-directory: ./04 Practice Project (Start)/
       - name: Publish JS filename
-        run: find dist/assets/*.js -type f -execdir echo '{}' ';'
+        id: publish
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'
         working-directory: ./04 Practice Project (Start)/
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
