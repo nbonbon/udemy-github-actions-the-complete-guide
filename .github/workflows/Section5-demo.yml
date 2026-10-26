@@ -11,18 +11,21 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
+        working-directory: ./04 Practice Project (Start)/
       - name: Lint code
         run: npm run lint
+        working-directory: ./04 Practice Project (Start)/
       - name: Test code
         run: npm run test
+        working-directory: ./04 Practice Project (Start)/
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dist-files
-          path: |
-            dist # where to find the files to upload
-            package.json # just here to show an example of uploading multiple files
-                         # otherwise, just path: dist
+          name: dist-files # what to name the uploaded artifact
+          path: ./04 Practice Project (Start)/dist # where to find the files to upload
+          # path: | # multiple files example
+          #   dist 
+          #   package.json # just here to show an example of uploading multiple files
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -31,8 +34,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
+        working-directory: ./04 Practice Project (Start)/
       - name: Build website
         run: npm run build
+        working-directory: ./04 Practice Project (Start)/
   deploy:
     needs: build
     runs-on: ubuntu-latest
