@@ -30,6 +30,9 @@ jobs:
       - name: Build website
         run: npm run build
         working-directory: ./04 Practice Project (Start)/
+      - name: Publish JS filename
+        run: find dist/assets/*.js -type f -execdir echo '{}' ';'
+        working-directory: ./04 Practice Project (Start)/
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -47,6 +50,6 @@ jobs:
         with:
           name: dist-files # should match the name above. Will download and unzip.
       - name: Output contents
-        run: ls
+        run: ls # wont show dist folder. Will have all the files themselves in the current directory.
       - name: Deploy
         run: echo "Deploying..."
