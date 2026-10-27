@@ -54,5 +54,7 @@ jobs:
           name: dist-files # should match the name above. Will download and unzip.
       - name: Output contents
         run: ls # wont show dist folder. Will have all the files themselves in the current directory.
+      - name: Output filename # Output value from build job
+        run: echo "${{ needs.build.outputs.script-file }}"
       - name: Deploy
         run: echo "Deploying..."
