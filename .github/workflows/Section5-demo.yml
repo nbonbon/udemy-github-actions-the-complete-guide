@@ -12,7 +12,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ./04 Practice Project (Start)/.npm # Depends on the kind of code and build system you are using
+          path: ~/.npm # Depends on the kind of code and build system you are using
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} 
           # Key will be used to be retrieved in the future
           # Hashes dependencies according to hash of the package.json which will be updated if there are new dependencies
@@ -36,7 +36,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ./04 Practice Project (Start)/.npm # Depends on the kind of code and build system you are using
+          path: ~/.npm # Depends on the kind of code and build system you are using
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} 
           # Key will be used to be retrieved in the future
           # Hashes dependencies according to hash of the package.json which will be updated if there are new dependencies
