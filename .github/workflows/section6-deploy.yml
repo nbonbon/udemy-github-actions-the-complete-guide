@@ -13,7 +13,7 @@ jobs:
       MONGODB_USERNAME: maximilian # To instead reference a secret: ${{ secrets.<SECRET_NAME> }} 
       MONGODB_PASSWORD: blahblahblah
       PORT: 8080
-    environment: testing
+    environment: testing # Use environment secrets instead of just repo secrets
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -37,6 +37,7 @@ jobs:
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
   deploy:
     needs: test
+    environment: production # Use environment secrets instead of just repo secrets
     runs-on: ubuntu-latest
     steps:
       - name: Output information
