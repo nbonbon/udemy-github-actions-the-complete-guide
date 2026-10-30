@@ -18,10 +18,13 @@ jobs:
           key: npm-deps-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
+        working-directory: ./Section6 - Starting Project/
       - name: Run server
         run: npm start & npx wait-on http://127.0.0.1:XYZ
+        working-directory: ./Section6 - Starting Project/
       - name: Run tests
         run: npm test
+        working-directory: ./Section6 - Starting Project/
       - name: Output information
         run: echo "..."
   deploy:
