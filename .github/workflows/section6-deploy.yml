@@ -5,7 +5,7 @@ on:
       - main
       - dev
 env:
-  MONGODB_DB_NAME: gha-demo # Environment level variable, available on all jobs
+  MONGODB_DB_NAME: gha-demo # Workflow level variable, available on all jobs
 jobs:
   test:
     env: 
