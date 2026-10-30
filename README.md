@@ -24,3 +24,6 @@ NOTE: By Default jobs run in parallel and on different runners
  
 # Section 6
 - Default GitHub environmental variables: https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-variables#default-environment-variables
+- Environments can be used to define secrets (only in paid private repos or public repos)
+  - Can then define the same secret in multiple environments (Dev, Test, Staging, etc)
+  - Can limit which branches can use what environments in the environments GUI
