@@ -4,8 +4,15 @@ on:
     branches:
       - main
       - dev
+env:
+  MONGODB_DB_NAME: gha-demo # Environment level variable, available on all jobs
 jobs:
   test:
+    env: 
+      MONGODB_CLUSTER_ADDRESS: cluster0.15pwqcc.mongodb.net # Job level variable, available only on test job
+      MONGODB_USERNAME: maximilian
+      MONGODB_PASSWORD: blahblahblah
+      PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
     steps:
