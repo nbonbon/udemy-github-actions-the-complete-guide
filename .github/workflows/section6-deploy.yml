@@ -10,7 +10,7 @@ jobs:
   test:
     env: 
       MONGODB_CLUSTER_ADDRESS: cluster0.15pwqcc.mongodb.net # Job level variable, available only on test job
-      MONGODB_USERNAME: maximilian
+      MONGODB_USERNAME: maximilian # To instead reference a secret: ${{ secrets.<SECRET_NAME> }} 
       MONGODB_PASSWORD: blahblahblah
       PORT: 8080
     environment: testing
