@@ -80,6 +80,13 @@ jobs:
       artifact-path: dist
     # secrets:
     #   some-secret: ${{ secrets.SOME_SECRET }}
+  print-deploy-results:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+        run: |
+          echo "${{ needs.deploy.outputs.result }}"
   report:
     needs: [lint, deploy] # Needs to wait for other jobs to finish.
     if: failure() # only run this job if any of the previous jobs failed
