@@ -27,3 +27,7 @@ NOTE: By Default jobs run in parallel and on different runners
 - Environments can be used to define secrets (only in paid private repos or public repos)
   - Can then define the same secret in multiple environments (Dev, Test, Staging, etc)
   - Can limit which branches can use what environments in the environments GUI
+- Special Conditional Functions 
+  - https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#status-check-functions
+  - failure()
+    - > Returns true when any previous step of a job fails. If you have a chain of dependent jobs, failure() returns true if any ancestor job fails.
