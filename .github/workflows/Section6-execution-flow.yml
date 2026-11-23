@@ -1,4 +1,4 @@
-name: Section 5 - Execution Flow
+name: Section 6 - Execution Flow
 on:
   push:
     branches:
