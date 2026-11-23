@@ -75,6 +75,9 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/Section6-reusable.yml # this is how you call a reusable workflow
+    with:
+      artifact-name: dist-files
+      artifact-path: dist
   report:
     needs: [lint, deploy] # Needs to wait for other jobs to finish.
     if: failure() # only run this job if any of the previous jobs failed
