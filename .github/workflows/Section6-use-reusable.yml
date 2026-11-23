@@ -1,0 +1,86 @@
+name: Section 6 - Using Reusable Workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: 04 Practice Project (Start)/node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true' # only run this step if cache was not hit
+        run: npm ci
+        working-directory: 04 Practice Project (Start)/
+      - name: Lint code
+        run: npm run lint
+        working-directory: 04 Practice Project (Start)/
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: 04 Practice Project (Start)/node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true' # only run this step if cache was not hit
+        run: npm ci
+        working-directory: 04 Practice Project (Start)/
+      - name: Test code
+        id: test-code
+        run: npm run test
+        working-directory: 04 Practice Project (Start)/
+      - name: Upload test report
+        if: failure() && steps.test-code.outcome == 'failure' # only upload if test fails, without failure() it will not run.
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-report
+          path: 04 Practice Project (Start)/test.json
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: 04 Practice Project (Start)/node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true' # only run this step if cache was not hit
+        run: npm ci
+        working-directory: 04 Practice Project (Start)/
+      - name: Build website
+        id: build-website
+        run: npm run build
+        working-directory: 04 Practice Project (Start)/
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-files
+          path: 04 Practice Project (Start)/dist
+  deploy:
+    needs: build
+    uses: ./.github/workflows/Section6-reusable.yml # this is how you call a reusable workflow
+  report:
+    needs: [lint, deploy] # Needs to wait for other jobs to finish.
+    if: failure() # only run this job if any of the previous jobs failed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: | 
+          echo "Something went wrong"
+          echo "${{ toJSON(github) }}"
