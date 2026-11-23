@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: test-report
-          path: test.json
+          path: ./04 Practice Project (Start)/test.json
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -71,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: dist-files
-          path: dist
+          path: ./04 Practice Project (Start)/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
