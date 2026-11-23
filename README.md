@@ -31,3 +31,5 @@ NOTE: By Default jobs run in parallel and on different runners
   - https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#status-check-functions
   - failure()
     - > Returns true when any previous step of a job fails. If you have a chain of dependent jobs, failure() returns true if any ancestor job fails.
+- continue-on-error
+  -  Will look like a successful task in the job (even when failing)
