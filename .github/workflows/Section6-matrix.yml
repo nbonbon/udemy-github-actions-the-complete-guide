@@ -2,6 +2,7 @@ name: Section 6 - Matrix Demo
 on: push
 jobs:
   build:
+    continue-on-error: true # this will allow the job to continue even if one of the matrix combinations fails
     strategy:
       matrix:
         node-version: [20, 22]
