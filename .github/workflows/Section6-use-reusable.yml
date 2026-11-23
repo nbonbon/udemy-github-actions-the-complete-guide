@@ -78,6 +78,8 @@ jobs:
     with:
       artifact-name: dist-files
       artifact-path: dist
+    # secrets:
+    #   some-secret: ${{ secrets.SOME_SECRET }}
   report:
     needs: [lint, deploy] # Needs to wait for other jobs to finish.
     if: failure() # only run this job if any of the previous jobs failed
