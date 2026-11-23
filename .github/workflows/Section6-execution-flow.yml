@@ -82,3 +82,11 @@ jobs:
         working-directory: ./04 Practice Project (Start)/
       - name: Deploy
         run: echo "Deploying..."
+  report:
+    if: failure() # only run this job if any of the previous jobs failed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: | 
+          echo "Something went wrong"
+          echo "${{ github }}"
