@@ -9,6 +9,13 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm # Depends on the kind of code and build system you are using
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} 
+          # Key will be used to be retrieved in the future
+          # Hashes dependencies according to hash of the package.json which will be updated if there are new dependencies
       - name: Install dependencies
         run: npm ci
         working-directory: ./04 Practice Project (Start)/
@@ -26,6 +33,13 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm # Depends on the kind of code and build system you are using
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} 
+          # Key will be used to be retrieved in the future
+          # Hashes dependencies according to hash of the package.json which will be updated if there are new dependencies
       - name: Install dependencies
         run: npm ci
         working-directory: ./04 Practice Project (Start)/
@@ -54,5 +68,7 @@ jobs:
           name: dist-files # should match the name above. Will download and unzip.
       - name: Output contents
         run: ls # wont show dist folder. Will have all the files themselves in the current directory.
+      - name: Output filename # Output value from build job
+        run: echo "${{ needs.build.outputs.script-file }}"
       - name: Deploy
         run: echo "Deploying..."

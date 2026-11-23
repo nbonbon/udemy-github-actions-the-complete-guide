@@ -1,0 +1,46 @@
+name: Section6 - Deployment
+on:
+  push:
+    branches:
+      - main
+      - dev
+env:
+  MONGODB_DB_NAME: gha-demo # Workflow level variable, available on all jobs
+jobs:
+  test:
+    env: 
+      MONGODB_CLUSTER_ADDRESS: cluster0.15pwqcc.mongodb.net # Job level variable, available only on test job
+      MONGODB_USERNAME: maximilian # To instead reference a secret: ${{ secrets.<SECRET_NAME> }} 
+      MONGODB_PASSWORD: blahblahblah
+      PORT: 8080
+    environment: testing # Use environment secrets instead of just repo secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./Section6 - Starting Project/
+      - name: Run server
+        run: npm start & npx wait-on http://127.0.0.1:$PORT # using PORT env variable defined above
+        working-directory: ./Section6 - Starting Project/
+      - name: Run tests
+        run: npm test
+        working-directory: ./Section6 - Starting Project/
+      - name: Output information
+        run: |
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+  deploy:
+    needs: test
+    environment: production # Use environment secrets instead of just repo secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |        
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
