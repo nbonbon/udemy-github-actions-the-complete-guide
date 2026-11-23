@@ -7,6 +7,14 @@ jobs:
       matrix:
         node-version: [20, 22]
         operating-system: [ubuntu-latest, windows-latest]
+        include:
+          # allows you to add additional matrix combinations that are not part of the main matrix
+          - node-version: 23
+            operating-system: ubuntu-latest
+        exclude:
+          # allows you to exclude certain matrix combinations
+          - node-version: 20
+            operating-system: windows-latest
     runs-on: ${{ matrix.operating-system }}
     steps:
       - name: Get code
