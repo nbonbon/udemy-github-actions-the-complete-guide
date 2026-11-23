@@ -17,8 +17,10 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
+        working-directory: ./04 Practice Project (Start)/
       - name: Lint code
         run: npm run lint
+        working-directory: ./04 Practice Project (Start)/
   test:
     runs-on: ubuntu-latest
     steps:
@@ -32,9 +34,11 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
+        working-directory: ./04 Practice Project (Start)/
       - name: Test code
         id: test-code
         run: npm run test
+        working-directory: ./04 Practice Project (Start)/
       - name: Upload test report
         if: steps.test-code.outcome == 'failure' # only upload if test fails
         uses: actions/upload-artifact@v7
@@ -55,9 +59,11 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
+        working-directory: ./04 Practice Project (Start)/
       - name: Build website
         id: build-website
         run: npm run build
+        working-directory: ./04 Practice Project (Start)/
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -73,5 +79,6 @@ jobs:
           name: dist-files
       - name: Output contents
         run: ls
+        working-directory: ./04 Practice Project (Start)/
       - name: Deploy
         run: echo "Deploying..."
