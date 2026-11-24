@@ -14,11 +14,17 @@ jobs:
     # container: 
     #   image: node:20 # uses the latest node version 16 docker container image from docker hub
     env:
-      MONGODB_CONNECTION_PROTOCOL: mongodb+srv
-      MONGODB_CLUSTER_ADDRESS: cluster0.ntrwp.mongodb.net
-      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CLUSTER_ADDRESS: mongodb # Can use the mongodb service name as the connection string 
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
       PORT: 8080
+    services: # Setup services container for MongoDB
+      mongodb:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
     steps:
       - name: Get Code
         uses: actions/checkout@v4
@@ -27,8 +33,12 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ env.CACHE_KEY }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Show Node/NPM versions
+        run: |
+          node --version
+          npm --version
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --verbose
         working-directory: "Section8 - StartingProject"
       - name: Run server
         run: npm start & npx wait-on http://127.0.0.1:$PORT # requires MongoDB Atlas to accept requests from anywhere!
