@@ -16,12 +16,15 @@ jobs:
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
       MONGODB_CLUSTER_ADDRESS: mongodb # Can use the mongodb service name as the connection string 
+      # for MONGODB_CLUSTER_ADDRESS would need to use 127.0.0.1:27017 if not using containers  
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
     services: # Setup services container for MongoDB
       mongodb:
         image: mongo
+        # ports: # this would be needed if not building in a container
+        #   - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example

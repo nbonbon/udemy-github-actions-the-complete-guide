@@ -36,3 +36,18 @@ NOTE: By Default jobs run in parallel and on different runners
 - inputs context object
   - https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#inputs-context
   - Allows you to pass in parameters to reuable workflows
+
+# Section 9: Custom Actions
+- Why?
+  - Simplify workflow steps
+  - Reuse action in multiple workflows / jobs
+  - No existing public actions that do it how you need (more customizable)
+  - Share it with other people
+- Types of Custom Actions
+  - Javascript
+    - Define actions in JavaScript file (Can use Node packages)
+  - Docker
+    - Containerized action. Create Dockerfile, Create with any language. 
+  - Composite
+    - Combine multple workflow steps into one single actions
+    - Allows for reusing share steps
