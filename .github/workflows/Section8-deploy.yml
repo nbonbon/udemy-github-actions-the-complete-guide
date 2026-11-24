@@ -12,7 +12,7 @@ jobs:
     environment: testing
     runs-on: ubuntu-latest
     container: 
-      image: node:16 # uses the latest node version 16 docker container image from docker hub
+      image: node:20 # uses the latest node version 16 docker container image from docker hub
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: cluster0.ntrwp.mongodb.net
@@ -21,9 +21,9 @@ jobs:
       PORT: 8080
     steps:
       - name: Get Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ env.CACHE_KEY }}-${{ hashFiles('**/package-lock.json') }}
@@ -47,7 +47,7 @@ jobs:
       - name: Output information
         env:
           PORT: 3000
-        run: |        
+        run: |
           echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
           echo "MONGODB_USERNAME: $MONGODB_USERNAME"
           echo "${{ env.PORT }}"
